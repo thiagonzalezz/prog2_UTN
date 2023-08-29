@@ -34,7 +34,7 @@ public class Electrodomestico {
     public Electrodomestico(float precio, String color, char consumo, float peso) {
         this.precio = precio;
         comprobarColor(color);
-        this.consumo = consumo;
+        comprobarConsumoEnergetico(consumo);
         this.peso = peso;
     }
 
@@ -75,6 +75,9 @@ public class Electrodomestico {
         if (letra>='A' && letra<='F'){
             this.consumo = letra;
         }
+        else{
+            this.consumo = CONSUMO_DEFECTO;
+        }
 
     }
     // Mediante un for each comparamos el color ingresado con el array de colores
@@ -88,7 +91,36 @@ public class Electrodomestico {
                 this.color = COLOR_DEFECTO;
             }
         }
-
-
+    }
+    public void precioFinal(){
+        switch(this.consumo){
+            case 'A':
+                this.precio+=100;
+                break;
+            case 'B':
+                this.precio+=80;
+                break;
+            case 'C':
+                this.precio+=60;
+                break;
+            case 'D':
+                this.precio+=50;
+                break;
+            case 'E':
+                this.precio+=30;
+                break;
+            case 'F':
+                this.precio+=10;
+                break;
+        }
+        if(this.peso>=0 && this.peso<=19){
+            this.precio+=10;
+        } else if(this.peso>=20 && this.peso<=49){
+            this.precio+=50;
+        } else if(this.peso>=50 && this.peso<=79){
+            this.precio+=80;
+        } else if(this.peso>80){
+            this.precio+=100;
+        }
     }
 }
