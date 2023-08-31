@@ -100,7 +100,7 @@ public class Electrodomestico {
         }
     }
     public double precioFinal(){
-        float p = 0;
+        double p = this.precio;
         switch(this.consumo){
             case 'A':
                 p+=100;
