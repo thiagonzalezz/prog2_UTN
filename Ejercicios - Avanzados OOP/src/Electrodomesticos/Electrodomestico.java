@@ -1,14 +1,16 @@
 package Electrodomesticos;
 
 public class Electrodomestico {
-    protected float precio;
+    protected double precio;
     protected float peso;
     protected String color;
     protected char consumo;
+    protected int id;
+    public static int contador = 0;
 
 
     private static final char CONSUMO_DEFECTO = 'F';
-    private static final float PRECIO_DEFECTO = 100000;
+    private static final double PRECIO_DEFECTO = 100000;
     private static final String COLOR_DEFECTO = "blanco";
     private static final float PESO_DEFECTO = 5;
 
@@ -22,23 +24,28 @@ public class Electrodomestico {
         this.color = COLOR_DEFECTO;
         this.consumo = CONSUMO_DEFECTO;
         this.peso = PESO_DEFECTO;
+        this.id = contador++;
     }
     // Constructor con el precio y peso. El resto por defecto.
-    public Electrodomestico(float precio, float peso) {
+    public Electrodomestico(double precio, float peso) {
+        // Cuando se pone this solo hace referencia o llama directamente
+        // al constructor por defecto
+        this();
         this.precio = precio;
         this.peso = peso;
         this.color = COLOR_DEFECTO;
         this.consumo = CONSUMO_DEFECTO;
     }
     // Constructor con todos los atributos
-    public Electrodomestico(float precio, String color, char consumo, float peso) {
+    public Electrodomestico(double precio, String color, char consumo, float peso) {
+        this();
         this.precio = precio;
         comprobarColor(color);
         comprobarConsumoEnergetico(consumo);
         this.peso = peso;
     }
 
-    public float getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
@@ -92,35 +99,37 @@ public class Electrodomestico {
             }
         }
     }
-    public void precioFinal(){
+    public double precioFinal(){
+        float p = 0;
         switch(this.consumo){
             case 'A':
-                this.precio+=100;
+                p+=100;
                 break;
             case 'B':
-                this.precio+=80;
+                p+=80;
                 break;
             case 'C':
-                this.precio+=60;
+                p+=60;
                 break;
             case 'D':
-                this.precio+=50;
+                p+=50;
                 break;
             case 'E':
-                this.precio+=30;
+                p+=30;
                 break;
             case 'F':
-                this.precio+=10;
+                p+=10;
                 break;
         }
         if(this.peso>=0 && this.peso<=19){
-            this.precio+=10;
+            p+=10;
         } else if(this.peso>=20 && this.peso<=49){
-            this.precio+=50;
+            p+=50;
         } else if(this.peso>=50 && this.peso<=79){
-            this.precio+=80;
+            p+=80;
         } else if(this.peso>80){
-            this.precio+=100;
+            p+=100;
         }
+        return p;
     }
 }
